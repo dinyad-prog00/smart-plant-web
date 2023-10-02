@@ -1,0 +1,14 @@
+{
+  "targets": {
+    "smart-plant-fbfdb": {
+      "hosting": {
+        "smart-plant-web": [
+          "smart-plant-fbfdb"
+        ]
+      }
+    }
+  },
+  "projects": {
+    "default": "smart-plant-fbfdb"
+  }
+}

@@ -1,0 +1,9 @@
+{
+  "hosting": [
+    {
+      "target": "smart-plant-web",
+      "source": ".",
+      "frameworksBackend": {}
+    }
+  ]
+}
