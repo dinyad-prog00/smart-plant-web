@@ -10,11 +10,33 @@ import { ChartConfiguration, ChartOptions, ChartType } from "chart.js";
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
+
+
 export class AppComponent {
   private historyRef?: AngularFireList<Measurement>;
+  public values : string[] = ["humidity","lightRadiation","temperature","gazPresence","ph"]
   public history?: Measurement[]
   public humidity?: ChartConfiguration<'line'>['data'];
+  public lightRadiation?: ChartConfiguration<'line'>['data']
+  public temperature?: ChartConfiguration<'line'>['data']
+  public gazPresence?: ChartConfiguration<'line'>['data']
   public ph?: ChartConfiguration<'line'>['data'];
+  public activeIndex:number = 0;
+
+  private humidityThreshold = 2000
+  private lightRadiationThreshold = 20
+  private temperatureThreshold = 30
+  private gazThreshold = 0
+  private phThreshold = 12
+
+  public humidityAltert : boolean = false
+  public lightRadiationAltert : boolean = false
+  public temperatureAltert : boolean = false
+  public gazAltert : boolean = false
+  public phAltert : boolean = false
+
+  //
+  
 
   public lineChartOptions: ChartOptions<'line'> = {
     responsive: true,
@@ -40,7 +62,7 @@ export class AppComponent {
     this.historyRef = db.list<Measurement>(path)
   }
 
-  formatDate = (dt: Date) => moment(dt) .format("MMM D HH:mm");
+  formatDate = (dt: Date) => moment(dt).format("MMM D HH:mm");
 
   ngOnInit(): void {
     this.historyRef?.snapshotChanges()
@@ -71,11 +93,60 @@ export class AppComponent {
           ]
         }
 
-        this.ph = {
-          labels: data.map((it) => it.date).slice(len - 150).map(this.formatDate),
+        this.lightRadiation = {
+          labels: data.map((it) => it.date).slice(len - 50).map(this.formatDate),
           datasets: [
             {
-              data: data.map((it) => it.ph).slice(len - 150) as number[],
+              data: data.map((it) => it.lightRadiation).slice(len - 50) as number[],
+              label: 'Light Radiation',
+              fill: true,
+              tension: 0.5,
+              borderColor: 'black',
+              backgroundColor: 'rgba(5,80,0,0.3)'
+            },
+
+
+          ]
+        }
+
+
+        this.temperature = {
+          labels: data.map((it) => it.date).slice(len - 50).map(this.formatDate),
+          datasets: [
+            {
+              data: data.map((it) => it.temperature).slice(len - 50) as number[],
+              label: 'Temperature',
+              fill: true,
+              tension: 0.5,
+              borderColor: 'black',
+              backgroundColor: 'rgba(5,90,5,0.3)'
+            },
+
+
+          ]
+        }
+
+        this.gazPresence = {
+          labels: data.map((it) => it.date).slice(len - 50).map(this.formatDate),
+          datasets: [
+            {
+              data: data.map((it) => it.gazDetected).slice(len - 50) as number[],
+              label: 'Gaz Presence',
+              fill: true,
+              tension: 0.5,
+              borderColor: 'black',
+              backgroundColor: 'rgba(5,90,5,0.3)'
+            },
+
+
+          ]
+        }
+
+        this.ph = {
+          labels: data.map((it) => it.date).slice(len - 50).map(this.formatDate),
+          datasets: [
+            {
+              data: data.map((it) => it.ph).slice(len - 50) as number[],
               label: 'PH',
               fill: true,
               tension: 0.5,
@@ -85,6 +156,41 @@ export class AppComponent {
 
 
           ]
+        }
+
+        if(data[data.length-1].humidity< this.humidityThreshold){
+          this.humidityAltert=true
+        }else{
+          this.humidityAltert=false
+
+        }
+
+        if(data[data.length-1].lightRadiation< this.lightRadiationThreshold){
+          this.lightRadiationAltert=true
+        }else{
+          this.lightRadiationAltert=false
+
+        }
+
+        if(data[data.length-1].temperature> this.temperatureThreshold){
+          this.temperatureAltert=true
+        }else{
+          this.temperatureAltert=false
+
+        }
+
+        if(data[data.length-1].gazDetected> this.gazThreshold){
+          this.gazAltert=true
+        }else{
+          this.gazAltert=false
+
+        }
+
+        if(data[data.length-1].ph> this.phThreshold){
+          this.phAltert=true
+        }else{
+          this.phAltert=false
+
         }
 
 

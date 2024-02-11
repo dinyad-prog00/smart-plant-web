@@ -1,371 +1,607 @@
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
-<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
-<!-- * * * * * * * * * * and can be replaced. * * * * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-<!-- * * * * * * * * * Delete the template below * * * * * * * * * * -->
-<!-- * * * * * * * to get started with your project! * * * * * * * * -->
-<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
-
 <style>
-  :host {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
-    font-size: 14px;
-    color: #333;
-    box-sizing: border-box;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
 
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6 {
-    margin: 8px 0;
-  }
-
-  p {
-    margin: 0;
-  }
-
-  .spacer {
-    flex: 1;
-  }
-
-  .toolbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    height: 60px;
-    display: flex;
-    align-items: center;
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-  }
-
-  .toolbar img {
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo {
-    height: 40px;
-    margin: 0 8px;
-  }
-
-  .toolbar #youtube-logo {
-    height: 40px;
-    margin: 0 16px;
-  }
-
-  .toolbar #twitter-logo:hover,
-  .toolbar #youtube-logo:hover {
-    opacity: 0.8;
-  }
-
-  .content {
-    display: flex;
-    margin: 82px auto 32px;
-    padding: 0 16px;
-    max-width: 960px;
-    flex-direction: column;
-    align-items: center;
-  }
-
-  svg.material-icons {
-    height: 24px;
-    width: auto;
-  }
-
-  svg.material-icons:not(:last-child) {
-    margin-right: 8px;
-  }
-
-  .card svg.material-icons path {
-    fill: #888;
-  }
-
-  .card-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    margin-top: 16px;
-  }
-
-  .card {
-    all: unset;
-    border-radius: 4px;
-    border: 1px solid #eee;
-    background-color: #fafafa;
-    height: 40px;
-    width: 200px;
-    margin: 0 8px 16px;
-    padding: 16px;
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-    transition: all 0.2s ease-in-out;
-    line-height: 24px;
-  }
-
-  .card-container .card:not(:last-child) {
-    margin-right: 0;
-  }
-
-  .card.card-small {
-    height: 16px;
-    width: 168px;
-  }
-
-  .card-container .card:not(.highlight-card) {
-    cursor: pointer;
-  }
-
-  .card-container .card:not(.highlight-card):hover {
-    transform: translateY(-3px);
-    box-shadow: 0 4px 17px rgba(0, 0, 0, 0.35);
-  }
-
-  .card-container .card:not(.highlight-card):hover .material-icons path {
-    fill: rgb(105, 103, 103);
-  }
-
-  .card.highlight-card {
-    background-color: #1976d2;
-    color: white;
-    font-weight: 600;
-    border: none;
-    width: auto;
-    min-width: 30%;
-    position: relative;
-  }
-
-  .card.card.highlight-card span {
-    margin-left: 60px;
-  }
-
-  svg#rocket {
-    width: 80px;
-    position: absolute;
-    left: -10px;
-    top: -24px;
-  }
-
-  svg#rocket-smoke {
-    height: calc(100vh - 95px);
-    position: absolute;
-    top: 10px;
-    right: 180px;
-    z-index: -10;
-  }
-
-  a,
-  a:visited,
-  a:hover {
-    color: #1976d2;
-    text-decoration: none;
-  }
-
-  a:hover {
-    color: #125699;
-  }
-
-  .terminal {
-    position: relative;
-    width: 80%;
-    max-width: 600px;
-    border-radius: 6px;
-    padding-top: 45px;
-    margin-top: 8px;
-    overflow: hidden;
-    background-color: rgb(15, 15, 16);
-  }
-
-  .terminal::before {
-    content: "\2022 \2022 \2022";
-    position: absolute;
-    top: 0;
-    left: 0;
-    height: 4px;
-    background: rgb(58, 58, 58);
-    color: #c2c3c4;
-    width: 100%;
-    font-size: 2rem;
-    line-height: 0;
-    padding: 14px 0;
-    text-indent: 4px;
-  }
-
-  .terminal pre {
-    font-family: SFMono-Regular, Consolas, Liberation Mono, Menlo, monospace;
-    color: white;
-    padding: 0 1rem 1rem;
-    margin: 0;
-  }
-
-  .circle-link {
-    height: 40px;
-    width: 40px;
-    border-radius: 40px;
-    margin: 8px;
-    background-color: white;
-    border: 1px solid #eeeeee;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.12), 0 1px 2px rgba(0, 0, 0, 0.24);
-    transition: 1s ease-out;
-  }
-
-  .circle-link:hover {
-    transform: translateY(-0.25rem);
-    box-shadow: 0px 3px 15px rgba(0, 0, 0, 0.2);
-  }
-
-  footer {
-    margin-top: 8px;
-    display: flex;
-    align-items: center;
-    line-height: 20px;
-  }
-
-  footer a {
-    display: flex;
-    align-items: center;
-  }
-
-  .github-star-badge {
-    color: #24292e;
-    display: flex;
-    align-items: center;
-    font-size: 12px;
-    padding: 3px 10px;
-    border: 1px solid rgba(27, 31, 35, .2);
-    border-radius: 3px;
-    background-image: linear-gradient(-180deg, #fafbfc, #eff3f6 90%);
-    margin-left: 4px;
-    font-weight: 600;
-  }
-
-  .github-star-badge:hover {
-    background-image: linear-gradient(-180deg, #f0f3f6, #e6ebf1 90%);
-    border-color: rgba(27, 31, 35, .35);
-    background-position: -.5em;
-  }
-
-  .github-star-badge .material-icons {
-    height: 16px;
-    width: 16px;
-    margin-right: 4px;
-  }
-
-  svg#clouds {
-    position: fixed;
-    bottom: -160px;
-    left: -230px;
-    z-index: -10;
-    width: 1920px;
-  }
-
-  /* Responsive Styles */
-  @media screen and (max-width: 767px) {
-
-    .card-container>*:not(.circle-link),
-    .terminal {
-      width: 100%;
-    }
-
-    .card:not(.highlight-card) {
-      height: 16px;
-      margin: 8px 0;
-    }
-
-    .card.highlight-card span {
-      margin-left: 72px;
-    }
-
-    svg#rocket-smoke {
-      right: 120px;
-      transform: rotate(-5deg);
-    }
-  }
-
-  @media screen and (max-width: 575px) {
-    svg#rocket-smoke {
-      display: none;
-      visibility: hidden;
-    }
-  }
 </style>
 
-<!-- Toolbar -->
-<div class="toolbar" role="banner">
-  <img width="40" alt="Angular Logo"
-    src="data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCAyNTAgMjUwIj4KICAgIDxwYXRoIGZpbGw9IiNERDAwMzEiIGQ9Ik0xMjUgMzBMMzEuOSA2My4ybDE0LjIgMTIzLjFMMTI1IDIzMGw3OC45LTQzLjcgMTQuMi0xMjMuMXoiIC8+CiAgICA8cGF0aCBmaWxsPSIjQzMwMDJGIiBkPSJNMTI1IDMwdjIyLjItLjFWMjMwbDc4LjktNDMuNyAxNC4yLTEyMy4xTDEyNSAzMHoiIC8+CiAgICA8cGF0aCAgZmlsbD0iI0ZGRkZGRiIgZD0iTTEyNSA1Mi4xTDY2LjggMTgyLjZoMjEuN2wxMS43LTI5LjJoNDkuNGwxMS43IDI5LjJIMTgzTDEyNSA1Mi4xem0xNyA4My4zaC0zNGwxNy00MC45IDE3IDQwLjl6IiAvPgogIDwvc3ZnPg==" />
-  <span>Smart Plant</span>
-  <div class="spacer"></div>
 
+<nav class="bg-teal-700 text-white border-gray-200 dark:bg-gray-900">
+  <div class="flex flex-wrap justify-between items-center mx-auto max-w-screen-xl p-4">
+    <a href="/" class="flex items-center space-x-3 rtl:space-x-reverse">
+      <img src="/assets/plant.jpg" class="h-8 rounded-full" alt="Smart Plant" />
+      <span class="self-center text-2xl font-semibold whitespace-nowrap dark:text-white">Smart Plant</span>
+    </a>
+    <div class="flex items-center space-x-6 rtl:space-x-reverse">
+      <a href="#" class="text-sm  text-blue-600 dark:text-blue-500 hover:underline"></a>
+    </div>
+  </div>
+</nav>
+<!-- <nav class="bg-gray-50 dark:bg-gray-700">
+  <div class="max-w-screen-xl px-4 py-3 mx-auto">
+      <div class="flex items-center">
+          <ul class="flex flex-row font-medium mt-0 space-x-8 rtl:space-x-reverse text-sm">
+              <li>
+                  <a href="#" class="text-gray-900 dark:text-white hover:underline" aria-current="page">Home</a>
+              </li>
+              <li>
+                  <a href="#" class="text-gray-900 dark:text-white hover:underline">Company</a>
+              </li>
+              <li>
+                  <a href="#" class="text-gray-900 dark:text-white hover:underline">Team</a>
+              </li>
+              <li>
+                  <a href="#" class="text-gray-900 dark:text-white hover:underline">Features</a>
+              </li>
+          </ul>
+      </div>
+  </div>
+</nav> -->
+
+
+
+<div
+  class="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700">
+  <ul class="flex flex-wrap -mb-px mx-auto max-w-screen-xl">
+    <li class="me-2" (click)="activeIndex = 0">
+      <a href="#"
+        [ngClass]="{'inline-block p-4 border-b-2':true,'border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300 dark:hover:text-gray-300':activeIndex!=0, 'text-blue-600 border-blue-600 rounded-t-lg active': activeIndex==0}"
+        aria-current="page">Overview</a>
+    </li>
+    <li class="me-2" (click)="activeIndex = 1">
+      <a href="#"
+        [ngClass]="{'inline-block p-4 border-b-2':true,'border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300':activeIndex!==1,'text-blue-600 border-blue-600 rounded-t-lg active': activeIndex===1}">Humidity</a>
+    </li>
+
+    <li class="me-2" (click)="activeIndex = 2">
+      <a href="#"
+        [ngClass]="{'inline-block p-4 border-b-2':true,'border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300':activeIndex!==2,'text-blue-600 border-blue-600 rounded-t-lg active': activeIndex===2}">Light
+        Radiation</a>
+    </li>
+    <li class="me-2" (click)="activeIndex = 3">
+      <a href="#"
+        [ngClass]="{'inline-block p-4 border-b-2':true,'border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300':activeIndex!==3,'text-blue-600 border-blue-600 rounded-t-lg active': activeIndex===3}">Temperature</a>
+    </li>
+    <li class="me-2" (click)="activeIndex = 4">
+      <a href="#"
+        [ngClass]="{'inline-block p-4 border-b-2':true,'border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300':activeIndex!==4,'text-blue-600 border-blue-600 rounded-t-lg active': activeIndex===4}">Gaz
+        Detector</a>
+    </li>
+    <li class="me-2" (click)="activeIndex = 5">
+      <a href="#"
+        [ngClass]="{'inline-block p-4 border-b-2':true,'border-transparent rounded-t-lg hover:text-gray-600 hover:border-gray-300':activeIndex!==5,'text-blue-600 border-blue-600 rounded-t-lg active': activeIndex===5}">PH</a>
+    </li>
+
+  </ul>
 </div>
 
-<div class="content" role="main">
-  <div style="display: block;">
-    <canvas baseChart width="1500" height="400"
-      [type]="'line'"
-      [data]="humidity"
-      [options]="lineChartOptions"
-      [legend]="lineChartLegend">
-    </canvas>
-  </div>
+<p-tabView [(activeIndex)]="activeIndex">
+  <p-tabPanel>
+    <div class="flex">
+      <div class="w-min border-r border-gray-200 pr-10">
+        <h2 class="mb-2 text-lg font-semibold text-gray-900 dark:text-white">Etats</h2>
+        <ul class="max-w-md space-y-2 text-gray-500 list-inside dark:text-gray-400">
 
-  <div style="display: block;">
-    <canvas baseChart width="1500" height="400"
-      [type]="'line'"
-      [data]="ph"
-      [options]="lineChartOptions"
-      [legend]="lineChartLegend">
-    </canvas>
-  </div>
-  <table>
-    <thead>
-      <tr>
-        <th>date</th>
-        <th>humidity</th>
-        <th>lightRadiation</th>
-        <th>ph</th>
-        <th>saltContent</th>
-        <th>potassiumContent</th>
-        <th>nitrateContent</th>
-      </tr>
-    </thead>
-    <tbody *ngFor="let h of history">
-      <tr>
-        <td>{{h.date}}</td>
-        <td>{{h.humidity}}</td>
-        <td>{{h.lightRadiation}}</td>
-        <td>{{h.ph}}</td>
-        <td>{{h.saltContent}}</td>
-        <td>{{h.potassiumContent}}</td>
-        <td>{{h.nitrateContent}} </td>
-    </tr>
-    </tbody>
-  </table>
-  <!-- <ul *ngFor="let h of history">
-    <li>{{h.date}}
-      date: {{h.date}}
-      humidity: {{h.humidity}}
-      lightRadiation: {{h.lightRadiation}}
-      ph: {{h.ph}}
-      saltContent: {{h.saltContent}}
-      potassiumContent: {{h.potassiumContent}}
-      nitrateContent : {{h.nitrateContent}} </li>
-  </ul> -->
+          <li class="flex items-center" *ngIf="!humidityAltert">
+            <svg class="w-4 h-4 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+            </svg>
+            Humitité
+          </li>
+          <li class="flex items-center text-red-800" *ngIf="humidityAltert">
 
-</div>
+            <svg class="flex-shrink-0 w-4 h-4  me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+
+            Humitité
+          </li>
+
+
+          <li class="flex items-center"  *ngIf="!lightRadiationAltert">
+            <svg class="w-4 h-4 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+            </svg>
+            Lumière
+          </li>
+          <li class="flex items-center text-red-800" *ngIf="lightRadiationAltert">
+
+            <svg class="flex-shrink-0 w-4 h-4  me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+
+            Lumière
+          </li>
+
+          <li class="flex items-center" *ngIf="!temperatureAltert">
+            <svg class="w-4 h-4 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+            </svg>
+            Temperature
+          </li>
+
+          <li class="flex items-center text-red-800" *ngIf="temperatureAltert">
+
+            <svg class="flex-shrink-0 w-4 h-4  me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+
+            Temperature
+          </li>
+
+          <li class="flex items-center" *ngIf="!gazAltert">
+            <svg class="w-4 h-4 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+            </svg>
+            Gaz
+          </li>
+
+          <li class="flex items-center text-red-800"  *ngIf="gazAltert">
+
+            <svg class="flex-shrink-0 w-4 h-4  me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+
+            Gaz
+          </li>
+
+          <li class="flex items-center" *ngIf="!phAltert">
+            <svg class="w-4 h-4 me-2 text-green-500 dark:text-green-400 flex-shrink-0" aria-hidden="true"
+              xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5Zm3.707 8.207-4 4a1 1 0 0 1-1.414 0l-2-2a1 1 0 0 1 1.414-1.414L9 10.586l3.293-3.293a1 1 0 0 1 1.414 1.414Z" />
+            </svg>
+            PH
+          </li>
+
+          <li class="flex items-center text-red-800" *ngIf="phAltert">
+
+            <svg class="flex-shrink-0 w-4 h-4  me-2" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+
+            PH
+          </li>
+        </ul>
+
+
+      </div>
+      <div class="grow">
+        <div class="flex m-10 mx-0  mt-0 flex-wrap items-center justify-center">
+          <div style="display: block;" class="w-5/12 mx-10 my-5">
+            <canvas baseChart width="1500" height="400" [type]="'line'" [data]="humidity" [options]="lineChartOptions"
+              [legend]="lineChartLegend">
+            </canvas>
+          </div>
+
+          <div style="display: block;" class="w-5/12 mx-10 my-5">
+            <canvas baseChart width="1500" height="400" [type]="'line'" [data]="lightRadiation"
+              [options]="lineChartOptions" [legend]="lineChartLegend">
+            </canvas>
+          </div>
+
+          <div style="display: block;" class="w-5/12 mx-10 my-5">
+            <canvas baseChart width="1500" height="400" [type]="'line'" [data]="temperature"
+              [options]="lineChartOptions" [legend]="lineChartLegend">
+            </canvas>
+          </div>
+
+          <div style="display: block;" class="w-5/12 mx-10 my-5">
+            <canvas baseChart width="1500" height="400" [type]="'line'" [data]="gazPresence"
+              [options]="lineChartOptions" [legend]="lineChartLegend">
+            </canvas>
+          </div>
+
+          <div style="display: block;" class="w-5/12 mx-10 my-5">
+            <canvas baseChart width="1500" height="400" [type]="'line'" [data]="ph" [options]="lineChartOptions"
+              [legend]="lineChartLegend">
+            </canvas>
+          </div>
+
+        </div>
+
+
+      </div>
+
+    </div>
+
+
+
+  </p-tabPanel>
+
+  <!-- humidity -->
+  <p-tabPanel>
+    <div class="flex">
+      <div>
+        <div
+          class="max-w-sm h-full p-6 bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-gray-800 dark:border-gray-700">
+
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Capteur d'humidité du sol
+          </h5>
+
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            Un capteur d'humidité du sol est un dispositif conçu pour mesurer le niveau d'humidité du sol.
+            Ces capteurs sont couramment utilisés dans l'agriculture, l'horticulture, et d'autres domaines
+            où la gestion de l'arrosage est cruciale.
+
+
+
+
+          </p>
+
+          <p> Dans notre situation, l'arrosage est déclenché lorsque le niveau d'humidité descend en dessous de <span
+              class="text-black">200</span>.</p>
+
+
+
+
+        </div>
+
+
+
+
+      </div>
+      <div class="w-9/12 mx-10 my-5">
+        <canvas baseChart width="1500" height="400" [type]="'line'" [data]="humidity" [options]="lineChartOptions"
+          [legend]="lineChartLegend">
+        </canvas>
+        <div *ngIf="!humidityAltert">
+          <div
+            class="flex items-center  mt-20 p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">OK!</span> Tout fonctionne normalement avec votre plante, vous pouvez prendre du
+              repos.
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="humidityAltert">
+          <div
+            class="flex items-center mt-20 p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Danger!</span> La valeur est inférieure au seuil, nécessitant une action
+              immédiate..
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+  </p-tabPanel>
+
+  <!-- lightRadiation -->
+  <p-tabPanel>
+    <div class="flex">
+      <div>
+        <div
+          class="max-w-sm h-full p-6 bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-gray-800 dark:border-gray-700">
+
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Capteur de lumière
+          </h5>
+
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            Un capteur de lumière est un dispositif électronique conçu pour mesurer l'intensité lumineuse dans son environnement. Il détecte les variations de la luminosité en convertissant la lumière en un signal électrique, permettant ainsi de surveiller les conditions d'éclairage dans un endroit donné. 
+
+
+
+          </p>
+
+          <p> Dans notre situation, on est alerté s'il descend en dessous de <span
+              class="text-black">20</span>.</p>
+
+
+
+
+        </div>
+
+
+
+
+      </div>
+      <div class="w-9/12 mx-10 my-5">
+        <canvas baseChart width="1500" height="400" [type]="'line'" [data]="lightRadiation" [options]="lineChartOptions"
+          [legend]="lineChartLegend">
+        </canvas>
+        <div *ngIf="!lightRadiationAltert">
+          <div
+            class="flex items-center  mt-20 p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">OK!</span> Tout fonctionne normalement avec votre plante, vous pouvez prendre du
+              repos.
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="lightRadiationAltert">
+          <div
+            class="flex items-center mt-20 p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Danger!</span> La valeur est inférieure au seuil, nécessitant une action
+              immédiate..
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+
+  </p-tabPanel>
+
+  <!-- temperature -->
+  <p-tabPanel>
+    <div class="flex">
+      <div>
+        <div
+          class="max-w-sm h-full p-6 bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-gray-800 dark:border-gray-700">
+
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Capteur de température (pression et altitude)
+          </h5>
+
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            Un capteur de température atmosphérique est un dispositif électronique conçu pour mesurer la température de l'air dans l'environnement. Il utilise des composants sensibles à la chaleur pour convertir la température en un signal électrique, fournissant ainsi des données précises sur les conditions thermiques de l'atmosphère. 
+
+
+
+          </p>
+
+          <p> Dans notre situation, on est alerté s'il monte au dessus de <span
+            class="text-black">30</span>.</p>
+
+
+
+
+        </div>
+
+
+
+
+      </div>
+      <div class="w-9/12 mx-10 my-5">
+        <canvas baseChart width="1500" height="400" [type]="'line'" [data]="temperature" [options]="lineChartOptions"
+          [legend]="lineChartLegend">
+        </canvas>
+        <div *ngIf="!humidityAltert">
+          <div
+            class="flex items-center  mt-20 p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">OK!</span> Tout fonctionne normalement avec votre plante, vous pouvez prendre du
+              repos.
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="temperatureAltert">
+          <div
+            class="flex items-center mt-20 p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Danger!</span> La valeur est inférieure au seuil, nécessitant une action
+              immédiate..
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+  </p-tabPanel>
+
+
+
+  <!-- gazPresence -->
+  <p-tabPanel>
+    <div class="flex">
+      <div>
+        <div
+          class="max-w-sm h-full p-6 bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-gray-800 dark:border-gray-700">
+
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Capteur de gaz et de fumée 
+          </h5>
+
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            Un capteur de gaz et de fumée est un dispositif électronique conçu pour détecter la présence de gaz ou de particules de fumée dans l'air. Ces capteurs sont essentiels pour la sécurité, car ils permettent de détecter rapidement des situations potentiellement dangereuses, comme une fuite de gaz ou un début d'incendie dans notre ferme.
+
+
+
+
+          </p>
+
+          <p> Dans notre situation, on est alerté si le capteur en détecte. </p>
+
+
+
+
+        </div>
+
+
+
+
+      </div>
+      <div class="w-9/12 mx-10 my-5">
+        <canvas baseChart width="1500" height="400" [type]="'line'" [data]="gazPresence" [options]="lineChartOptions"
+          [legend]="lineChartLegend">
+        </canvas>
+        <div *ngIf="!gazAltert">
+          <div
+            class="flex items-center  mt-20 p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">OK!</span> Tout fonctionne normalement avec votre plante, vous pouvez prendre du
+              repos.
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="gazAltert">
+          <div
+            class="flex items-center mt-20 p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Danger!</span> La valeur est inférieure au seuil, nécessitant une action
+              immédiate..
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+  </p-tabPanel>
+
+  <!-- ph -->
+  <p-tabPanel>
+    <div class="flex">
+      <div>
+        <div
+          class="max-w-sm h-full p-6 bg-white border border-gray-200 rounded-lg shadow-xs dark:bg-gray-800 dark:border-gray-700">
+
+          <h5 class="mb-2 text-2xl font-bold tracking-tight text-gray-900 dark:text-white">Capteur de PH
+          </h5>
+
+          <p class="mb-3 font-normal text-gray-700 dark:text-gray-400">
+            Un capteur de pH est un dispositif conçu pour mesurer le niveau d'acidité ou d'alcalinité d'une solution, souvent mesuré sur une échelle de 0 à 14 (0 étant très acide, 14 étant très alcalin, et 7 étant neutre).
+
+
+
+
+          </p>
+
+          <p> Dans notre situation, ca nous permet de savoir l'acidité de du sol de notre plante. On est alerté si ca monte au dessu <span
+              class="text-black">12</span>.</p>
+
+
+
+
+        </div>
+
+
+
+
+      </div>
+      <div class="w-9/12 mx-10 my-5">
+        <canvas baseChart width="1500" height="400" [type]="'line'" [data]="ph" [options]="lineChartOptions"
+          [legend]="lineChartLegend">
+        </canvas>
+        <div *ngIf="!phAltert">
+          <div
+            class="flex items-center  mt-20 p-4 mb-4 text-sm text-green-800 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">OK!</span> Tout fonctionne normalement avec votre plante, vous pouvez prendre du
+              repos.
+            </div>
+          </div>
+
+        </div>
+        <div *ngIf="phAltert">
+          <div
+            class="flex items-center mt-20 p-4 mb-4 text-sm text-red-800 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400"
+            role="alert">
+            <svg class="flex-shrink-0 inline w-4 h-4 me-3" aria-hidden="true" xmlns="http://www.w3.org/2000/svg"
+              fill="currentColor" viewBox="0 0 20 20">
+              <path
+                d="M10 .5a9.5 9.5 0 1 0 9.5 9.5A9.51 9.51 0 0 0 10 .5ZM9.5 4a1.5 1.5 0 1 1 0 3 1.5 1.5 0 0 1 0-3ZM12 15H8a1 1 0 0 1 0-2h1v-3H8a1 1 0 0 1 0-2h2a1 1 0 0 1 1 1v4h1a1 1 0 0 1 0 2Z" />
+            </svg>
+            <span class="sr-only">Info</span>
+            <div>
+              <span class="font-medium">Danger!</span> La valeur est inférieure au seuil, nécessitant une action
+              immédiate..
+            </div>
+          </div>
+        </div>
+
+
+
+      </div>
+
+    </div>
+  </p-tabPanel>
+</p-tabView>
+
 <!-- Highlight Card -->
 
 <!-- Footer -->

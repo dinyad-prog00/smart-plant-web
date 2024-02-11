@@ -1,9 +1,8 @@
 export interface Measurement {
     date: Date
-    humidity: Number
-    lightRadiation: Number
-    ph: Number
-    saltContent: Number
-    potassiumContent: Number
-    nitrateContent : Number
+    humidity: number
+    lightRadiation: number
+    ph: number
+    temperature: number
+    gazDetected: number
 }
